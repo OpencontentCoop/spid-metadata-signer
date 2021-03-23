@@ -48,7 +48,7 @@ openssl rsa -des3 -in your.key -out your.encrypted.key
 Se avete i file necessari nella directory del vostro computer in `/home/lorello/spid` eseguite
 il comando che segue:
 
-    docker run -it --rm -e METADATA=/data/metadata.xml -e KEY=/data/key.pem -e CRT=/data/crt.pem -v $(pwd):/data opencontent/metadata-signer
+    docker run -it --rm -e METADATA=/data/metadata.xml -e KEY=/data/key.pem -e CRT=/data/crt.pem -v $(pwd):/data opencontentcoop/spid-metadata-signer
 
 Dopo l'esecuzione troverete il file firmato in `/home/lorello/spid/metadata.xml-signed`
 
