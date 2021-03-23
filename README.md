@@ -1,11 +1,20 @@
 # SPID Metadata Signer
 
-Lo script permette di firmare un metadata SAML utilizzando [XmlSecTool](http://shibboleth.net/downloads/tools/xmlsectool/latest/xmlsectool-2.0.0-bin.zip).
+Lo script permette di firmare un metadata SAML utilizzando [XmlSecTool](https://wiki.shibboleth.net/confluence/display/XSTJ3/xmlsectool+V3+Home).
 
-⚠️ Attenzione! Questo progetto non è più manutenuto dai suoi autori. Se vuoi contribuire al progetto e diventare maintainer contattaci sul [canale Slack](https://developersitalia.slack.com/archives/C73R3UQE8) dedicato.
+## Requisiti 
 
-## Requisiti
-Per utilizzare lo script è necessario avere:
+## Con docker
+
+Se si usa docker è sufficiente eseguire il comando indicato avendo cura di specificare mappare
+nel container i file necessari:
+
+ * il file dei metadata
+ * la coppia di file certificato e chiave che saranno usati per la firma
+
+### Senza docker
+
+Per utilizzare lo script senza usare docker è necessario avere:
 
 * [XmlSecTool](http://shibboleth.net/downloads/tools/xmlsectool/latest/xmlsectool-2.0.0-bin.zip) (scaricato e verificato automaticamente dallo script)
 * Java
@@ -13,10 +22,14 @@ Per utilizzare lo script è necessario avere:
 * Metadata compliant alle [Regole Tecniche SPID](http://spid-regole-tecniche.readthedocs.io/en/latest/)
 * Chiave e certificato di firma (va bene anche quello utilizzato per la firma delle asserzioni saml)
 
+### Creazione chiave (se necessario)
+
 Per creare una chiave (con password) e un certificato:
 ```
 openssl req -x509 -sha256 -days 365 -newkey rsa:2048 -keyout nome-chiave.key -out nome-certificato.crt
 ```
+
+Nota bene: un certificato generato con questo comando avrà durata di 1 anno
 
 Per rimuovere la password alla chiave:
 ```
@@ -28,11 +41,21 @@ Per aggiungere la password alla chiave:
 openssl rsa -des3 -in your.key -out your.encrypted.key
 ```
 
-__Nota__: lo script effettua un controllo dei requisiti software e parametri
-
 ## Utilizzo
 
-### Procedura di firma attraverso script
+### Procedura di firma con docker
+
+Se avete i file necessari nella directory del vostro computer in `/home/lorello/spid` eseguite
+il comando che segue:
+
+    docker run -it --rm -e METADATA=/data/metadata.xml -e KEY=/data/key.pem -e CRT=/data/crt.pem -v $(pwd):/data opencontent/metadata-signer
+
+Dopo l'esecuzione troverete il file firmato in `/home/lorello/spid/metadata.xml-signed`
+
+*N.B.: se i vostri file hanno nomi diversi da `metadata.xml` o `crt.pem` dovete adattare il comando
+usando i vostri nomi di file*
+
+### Procedura di firma attraverso script 
 
 * Scaricare e scompattare la release o clonare il repository
 * Inserire la chiave e il certificato nella cartella "certs" (vanno bene anche quelli utilizzati per la firma delle asserzioni SAML)
