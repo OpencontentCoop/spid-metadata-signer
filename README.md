@@ -1,3 +1,11 @@
+
+[![License](https://img.shields.io/github/license/opencontentcoop/spid-metadata-signer.svg)](https://github.com/opencontentcoop/spid-metadata-signer/blob/master/LICENSE)
+[![GitHub issues](https://img.shields.io/github/issues/opencontentcoop/spid-metadata-signer.svg)](https://github.com/opencontentcoop/spid-metadata-signer/issues)
+[![Join the #spid channel](https://img.shields.io/badge/Slack%20channel-%23spid-blue.svg)](https://app.slack.com/client/T6C27AXE0/C7ESTJS58)
+[![Get invited](https://slack.developers.italia.it/badge.svg)](https://slack.developers.italia.it/)
+[![SPID on forum.italia.it](https://img.shields.io/badge/Forum-spid-blue.svg)](https://forum.italia.it/c/spid/5)
+[![Image Build](https://img.shields.io/docker/cloud/build/opencontentcoop/spid-metadata-signeri)](https://hub.docker.com/r/opencontentcoop/spid-metadata-signer)
+
 # SPID Metadata Signer
 
 Lo script permette di firmare un metadata SAML utilizzando [XmlSecTool](https://wiki.shibboleth.net/confluence/display/XSTJ3/xmlsectool+V3+Home).
